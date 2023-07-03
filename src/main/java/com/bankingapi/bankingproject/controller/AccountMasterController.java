@@ -1,4 +1,5 @@
 package com.bankingapi.bankingproject.controller;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,10 +22,10 @@ import com.bankingapi.bankingproject.repository.AccountMasterRepo;
 @RestController
 @RequestMapping("/account")
 public class AccountMasterController {
-    @Autowired
-    AccountMasterRepo _AccountMasterRepo;
+	@Autowired
+	AccountMasterRepo _AccountMasterRepo;
 
-    @GetMapping("/account/account/{account}")
+	@GetMapping("/account/account/{account}")
 	public ResponseEntity<AccountMaster> getcustomer(@PathVariable("account") Integer account) {
 		Optional<AccountMaster> ObjData = _AccountMasterRepo.findById(account);
 		if (ObjData.isPresent()) {
@@ -34,14 +35,14 @@ public class AccountMasterController {
 		}
 	}
 
-   @GetMapping("/account/{account}")
+	@GetMapping("/account/{account}")
 	public ResponseEntity<List<AccountMaster>> getbranch(@RequestParam(required = false) Integer account) {
 		try {
 			List<AccountMaster> ObjData = new ArrayList<AccountMaster>();
 			if (account == null) {
 				_AccountMasterRepo.findAll().forEach(ObjData::add);
 			} else {
-                _AccountMasterRepo.findById(account);
+				_AccountMasterRepo.findById(account);
 			}
 			if (ObjData.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -52,28 +53,25 @@ public class AccountMasterController {
 		}
 	}
 
-    @PostMapping("/account")
+	@PostMapping("/account")
 	public ResponseEntity<AccountMaster> UpdateProduct(@RequestBody AccountMaster cm) {
 		List<AccountMaster> ObjAccount = new ArrayList<AccountMaster>();
 		_AccountMasterRepo.findAll().forEach(ObjAccount::add);
 		AccountMaster Obj = new AccountMaster();
-			Obj.setBranchid(cm.getBranchid());
-			Obj.setAccountno(cm.getAccountno());
-            Obj.setProductid(cm.getProductid());
-            Obj.setCustomerid(cm.getCustomerid());
-            Obj.setAccountstatus(cm.getAccountstatus());
-            Obj.setAccountopendate(cm.getAccountopendate());
-            Obj.setBalance(cm.getBalance());
-            Obj.setAccountclosedate(cm.getAccountclosedate());
-            Obj.setModeofoperation(cm.getModeofoperation());
-            Obj.setOpenbyuser(cm.getOpenbyuser());
-            Obj.setAccountopendate(cm.getAccountopendate());
-            Obj.setClosedbyuser(cm.getClosedbyuser());
-			_AccountMasterRepo.save(Obj);
+		Obj.setBranchid(cm.getBranchid());
+		Obj.setAccountno(cm.getAccountno());
+		Obj.setProductid(cm.getProductid());
+		Obj.setCustomerid(cm.getCustomerid());
+		Obj.setAccountstatus(cm.getAccountstatus());
+		Obj.setAccountopendate(cm.getAccountopendate());
+		Obj.setBalance(cm.getBalance());
+		Obj.setAccountclosedate(cm.getAccountclosedate());
+		Obj.setModeofoperation(cm.getModeofoperation());
+		Obj.setOpenbyuser(cm.getOpenbyuser());
+		Obj.setAccountopendate(cm.getAccountopendate());
+		Obj.setClosedbyuser(cm.getClosedbyuser());
+		_AccountMasterRepo.save(Obj);
 		return new ResponseEntity<>(Obj, HttpStatus.OK);
 	}
-
-
-
 
 }

@@ -1,4 +1,5 @@
 package com.bankingapi.bankingproject.controller;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,24 +23,23 @@ public class TransactionMasterController {
     TransactionMasterRepo _TransactionMasterRepo;
 
     @PostMapping("/transaction")
-	public ResponseEntity<TransactionMaster> UpdateProduct(@RequestBody TransactionMaster cm) {
-		List<TransactionMaster> ObjAccount = new ArrayList<TransactionMaster>();
-		_TransactionMasterRepo.findAll().forEach(ObjAccount::add);
-		TransactionMaster Obj = new TransactionMaster();
-			Obj.setBranchid(cm.getBranchid());
-            Obj.setTxndate(cm.getTxndate());
-            Obj.setTxnid(cm.getTxnid());
-            Obj.setAccountid(cm.getAccountid());
-            Obj.setInstrno(cm.getInstrno());
-            Obj.setNarration(cm.getNarration());
-            Obj.setMaker(cm.getMaker());
-            Obj.setDrcr(cm.getDrcr());
-            Obj.setOpeningbalance(cm.getOpeningbalance());
-            Obj.setTxnamount(cm.getTxnamount());
-            Obj.setClossingbalance(cm.getClossingbalance());
-            _TransactionMasterRepo.save(Obj);
-    		return new ResponseEntity<>(Obj, HttpStatus.OK);
-	}
-    
+    public ResponseEntity<TransactionMaster> UpdateProduct(@RequestBody TransactionMaster cm) {
+        List<TransactionMaster> ObjAccount = new ArrayList<TransactionMaster>();
+        _TransactionMasterRepo.findAll().forEach(ObjAccount::add);
+        TransactionMaster Obj = new TransactionMaster();
+        Obj.setBranchid(cm.getBranchid());
+        Obj.setTxndate(cm.getTxndate());
+        Obj.setTxnid(cm.getTxnid());
+        Obj.setAccountid(cm.getAccountid());
+        Obj.setInstrno(cm.getInstrno());
+        Obj.setNarration(cm.getNarration());
+        Obj.setMaker(cm.getMaker());
+        Obj.setDrcr(cm.getDrcr());
+        Obj.setOpeningbalance(cm.getOpeningbalance());
+        Obj.setTxnamount(cm.getTxnamount());
+        Obj.setClossingbalance(cm.getClossingbalance());
+        _TransactionMasterRepo.save(Obj);
+        return new ResponseEntity<>(Obj, HttpStatus.OK);
+    }
 
 }

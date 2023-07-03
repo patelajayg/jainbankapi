@@ -35,9 +35,10 @@ public class ProductController {
 	@Autowired
 	BranchMasterRepo _BranchMasterRepo;
 
-	//Add/update Product for All Branches
+	// Add/update Product for All Branches
 	@GetMapping("/product/{branchid}/{productid}")
-	public ResponseEntity<ProductMaster> getciruclarsbyId(@PathVariable("branchid") Integer branchid,@PathVariable("productid") Integer productid) {
+	public ResponseEntity<ProductMaster> getciruclarsbyId(@PathVariable("branchid") Integer branchid,
+			@PathVariable("productid") Integer productid) {
 		ProductMasterPk pk = new ProductMasterPk(branchid, productid);
 		Optional<ProductMaster> ObjData = _ProductMasterRepo.findById(pk);
 		if (ObjData.isPresent()) {
@@ -46,15 +47,17 @@ public class ProductController {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-   @GetMapping("/product")
-	public ResponseEntity<List<ProductMaster>> getbranch(@RequestParam(required = false) Integer branchid, @RequestParam(required = false) Integer productid) {
+
+	@GetMapping("/product")
+	public ResponseEntity<List<ProductMaster>> getbranch(@RequestParam(required = false) Integer branchid,
+			@RequestParam(required = false) Integer productid) {
 		try {
 			List<ProductMaster> ObjData = new ArrayList<ProductMaster>();
 			if (branchid == null) {
 				_ProductMasterRepo.findAll().forEach(ObjData::add);
 			} else {
 				ProductMasterPk pk = new ProductMasterPk(branchid, productid);
-                _ProductMasterRepo.findById(pk);
+				_ProductMasterRepo.findById(pk);
 			}
 			if (ObjData.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
